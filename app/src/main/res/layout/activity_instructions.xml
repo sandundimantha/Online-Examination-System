@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvExamTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exam Title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instructions:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1. This exam contains multiple choice questions.\n2. There is a time limit for the exam.\n3. The exam will auto-submit when the timer ends.\n4. Do not minimize the app during the exam."
+        android:textSize="16sp"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:id="@+id/tvDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration: 30 Mins"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/btnStartExam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Exam"/>
+
+</LinearLayout>
