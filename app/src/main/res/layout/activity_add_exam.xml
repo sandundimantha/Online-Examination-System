@@ -34,6 +34,6 @@
         android:id="@+id/btnSaveExam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create & Add Questions"/>
+        android:text="Create &amp; Add Questions"/>
 
 </LinearLayout>
