@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "864420450078",
+    "project_id": "smartexam-259c4",
+    "storage_bucket": "smartexam-259c4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864420450078:android:ad3571dd7f855dc4d3430f",
+        "android_client_info": {
+          "package_name": "com.example.smartexam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkrbJ-ysEiwHHDPizNnYJXLxlEW41qyAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
