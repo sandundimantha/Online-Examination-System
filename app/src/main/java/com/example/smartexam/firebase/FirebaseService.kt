@@ -84,11 +84,11 @@ object FirebaseService {
                 val scienceExam = Exam("", "General Science", 10)
                 createExam(scienceExam) { success, examId ->
                     if (success && examId != null) {
-                        addQuestionToExam(examId, Question("", "What is the chemical symbol for Water?", "H2O", "O2", "CO2", "NaCl", "H2O"))
-                        addQuestionToExam(examId, Question("", "Which planet is known as the Red Planet?", "Venus", "Mars", "Jupiter", "Saturn", "Mars"))
-                        addQuestionToExam(examId, Question("", "What gas do plants absorb?", "Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen", "Carbon Dioxide"))
-                        addQuestionToExam(examId, Question("", "What is the center of an atom called?", "Electron", "Proton", "Nucleus", "Neutron", "Nucleus"))
-                        addQuestionToExam(examId, Question("", "Speed of light is faster than sound?", "True", "False", "Equal", "None", "True"))
+                        addQuestionToExam(examId, Question("", "What is the chemical symbol for Water?", "H2O", "O2", "CO2", "NaCl", "H2O")) { _, _ -> }
+                        addQuestionToExam(examId, Question("", "Which planet is known as the Red Planet?", "Venus", "Mars", "Jupiter", "Saturn", "Mars")) { _, _ -> }
+                        addQuestionToExam(examId, Question("", "What gas do plants absorb?", "Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen", "Carbon Dioxide")) { _, _ -> }
+                        addQuestionToExam(examId, Question("", "What is the center of an atom called?", "Electron", "Proton", "Nucleus", "Neutron", "Nucleus")) { _, _ -> }
+                        addQuestionToExam(examId, Question("", "Speed of light is faster than sound?", "True", "False", "Equal", "None", "True")) { _, _ -> }
                     }
                 }
 
@@ -96,9 +96,9 @@ object FirebaseService {
                 val mathExam = Exam("", "Mathematics", 15)
                 createExam(mathExam) { success, examId ->
                     if (success && examId != null) {
-                        addQuestionToExam(examId, Question("", "What is 2 + 2?", "3", "4", "5", "6", "4"))
-                        addQuestionToExam(examId, Question("", "Solve: 5 * 6", "30", "25", "35", "20", "30"))
-                        addQuestionToExam(examId, Question("", "Square root of 81?", "7", "8", "9", "10", "9"))
+                        addQuestionToExam(examId, Question("", "What is 2 + 2?", "3", "4", "5", "6", "4")) { _, _ -> }
+                        addQuestionToExam(examId, Question("", "Solve: 5 * 6", "30", "25", "35", "20", "30")) { _, _ -> }
+                        addQuestionToExam(examId, Question("", "Square root of 81?", "7", "8", "9", "10", "9")) { _, _ -> }
                     }
                 }
             }

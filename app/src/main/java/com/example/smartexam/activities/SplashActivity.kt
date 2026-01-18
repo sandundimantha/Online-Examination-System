@@ -21,8 +21,16 @@ class SplashActivity : AppCompatActivity() {
     private fun checkUserSession() {
         val user = FirebaseService.getCurrentUser()
         if (user != null) {
-            // Check role to direct correctly
+            // Safety timeout: If fetching role takes too long (e.g. offline), default to ExamList
+            val handler = Handler(Looper.getMainLooper())
+            val timeoutRunnable = Runnable {
+                startActivity(Intent(this, ExamListActivity::class.java))
+                finish()
+            }
+            handler.postDelayed(timeoutRunnable, 3000) // 3 seconds timeout
+
             FirebaseService.getUserRole(user.uid) { role ->
+                handler.removeCallbacks(timeoutRunnable) // Cancel timeout if successful
                 if (role == "admin") {
                     startActivity(Intent(this, AdminDashboardActivity::class.java))
                 } else {
