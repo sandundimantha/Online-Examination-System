@@ -64,6 +64,21 @@ class ExamListActivity : AppCompatActivity() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        if (item.itemId == R.id.action_logout) {
+            com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     // Inner Adapter class for simplicity
     inner class ExamAdapter(
         private val exams: List<Exam>,
