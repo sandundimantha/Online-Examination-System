@@ -37,6 +37,9 @@ class ExamListActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.rvExams.adapter = adapter
+        
+        // Auto-seed sample exams if none exist
+        com.example.smartexam.firebase.FirebaseService.seedExamsIfEmpty()
 
         fetchExams()
     }
