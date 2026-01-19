@@ -3,8 +3,12 @@ package com.example.smartexam.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.smartexam.R
 import com.example.smartexam.databinding.ActivityAdminBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.example.smartexam.fragments.AdminHomeFragment
+import com.example.smartexam.fragments.AdminResultsFragment
+import com.example.smartexam.fragments.ProfileFragment
 
 class AdminDashboardActivity : AppCompatActivity() {
 
@@ -15,20 +19,30 @@ class AdminDashboardActivity : AppCompatActivity() {
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnAddExam.setOnClickListener {
-            startActivity(Intent(this, AddExamActivity::class.java))
+        // Load default fragment
+        if (savedInstanceState == null) {
+            loadFragment(AdminHomeFragment())
         }
 
-        binding.btnViewResults.setOnClickListener {
-            startActivity(Intent(this, ViewResultsActivity::class.java)) // Need to create ViewResultsActivity
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            var fragment: Fragment? = null
+            when (item.itemId) {
+                R.id.nav_admin_home -> fragment = AdminHomeFragment()
+                R.id.nav_admin_results -> fragment = AdminResultsFragment()
+                R.id.nav_profile -> fragment = ProfileFragment()
+            }
+            if (fragment != null) {
+                loadFragment(fragment)
+                true
+            } else {
+                false
+            }
         }
+    }
 
-        binding.btnLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
-        }
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment_admin, fragment)
+            .commit()
     }
 }
