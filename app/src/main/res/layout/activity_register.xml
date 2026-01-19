@@ -54,14 +54,28 @@
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Role Selection could be implicit or explicit. For simplicity default is Student, Admin created manually or key rooted? 
-         User request says "Role-based login (Student / Admin)", usually registration defaults to Student. 
-         Let's add a simple RadioGroup for demo if needed, but safer to default to student. 
-         However, the user wants "Register" and "Role Selection" screen separate in user request list. 
-         Wait, "Role Selection" screen `activity_role.xml` is listed. 
-         Maybe that's for choosing where to go AFTER login if they have multiple roles, OR simple initial choice?
-         Let's just implement Register as clean student registration. Admin registration usually protected.
-    -->
+    <RadioGroup
+        android:id="@+id/rgRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <RadioButton
+            android:id="@+id/rbStudent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student"
+            android:checked="true"
+            android:layout_marginEnd="16dp"/>
+
+        <RadioButton
+            android:id="@+id/rbAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"/>
+    </RadioGroup>
 
     <Button
         android:id="@+id/btnRegister"

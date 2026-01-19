@@ -51,13 +51,21 @@ class RegisterActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val uid = task.result?.user?.uid ?: return@addOnCompleteListener
-                    // Default role is student
-                    val newUser = User(uid, name, email, "student")
+                    
+                    // Determine Role
+                    val selectedRoleId = binding.rgRole.checkedRadioButtonId
+                    val role = if (selectedRoleId == binding.rbAdmin.id) "admin" else "student"
+
+                    val newUser = User(uid, name, email, role)
                     
                     FirebaseService.saveUser(newUser) { success, error ->
                         if (success) {
                             Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this, ExamListActivity::class.java))
+                            if (role == "admin") {
+                                startActivity(Intent(this, AdminDashboardActivity::class.java))
+                            } else {
+                                startActivity(Intent(this, ExamListActivity::class.java))
+                            }
                             finishAffinity()
                         } else {
                             Toast.makeText(this, "Db Error: $error", Toast.LENGTH_SHORT).show()
