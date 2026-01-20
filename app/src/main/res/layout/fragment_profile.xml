@@ -21,6 +21,13 @@
         android:layout_marginBottom="32dp"/>
 
     <Button
+        android:id="@+id/btnSwitchRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Switch to Admin Role (Dev)"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -21,6 +21,10 @@ class AddExamActivity : AppCompatActivity() {
         binding.btnSaveExam.setOnClickListener {
             saveExam()
         }
+        
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun saveExam() {
@@ -39,7 +43,13 @@ class AddExamActivity : AppCompatActivity() {
         val duration = durationStr.toIntOrNull() ?: 30
         val exam = Exam(title = title, duration = duration) // ID generated in service
 
+        binding.btnSaveExam.isEnabled = false
+        binding.btnSaveExam.text = "Saving..."
+
         FirebaseService.createExam(exam) { success, resultId ->
+            binding.btnSaveExam.isEnabled = true
+            binding.btnSaveExam.text = "Create & Add Questions"
+            
             if (success && resultId != null) {
                 Toast.makeText(this, "Exam Created", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, AddQuestionActivity::class.java)

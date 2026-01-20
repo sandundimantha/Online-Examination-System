@@ -27,6 +27,10 @@ class RegisterActivity : AppCompatActivity() {
         binding.tvLogin.setOnClickListener {
             finish()
         }
+        
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun registerUser() {
@@ -72,7 +76,13 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     }
                 } else {
-                    Toast.makeText(this, "Register Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    val exception = task.exception
+                    if (exception is com.google.firebase.auth.FirebaseAuthUserCollisionException) {
+                        Toast.makeText(this, "Account already exists! Please Login.", Toast.LENGTH_LONG).show()
+                        // Optional: Redirect to Login automatically or highlight login text
+                    } else {
+                        Toast.makeText(this, "Register Failed: ${exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
     }

@@ -41,7 +41,11 @@ object FirebaseService {
     
     fun createExam(exam: Exam, onComplete: (Boolean, String?) -> Unit) {
         val examRef = database.child("exams").push()
-        val examId = examRef.key ?: return
+        val examId = examRef.key 
+        if (examId == null) {
+             onComplete(false, "Failed to generate Exam ID")
+             return
+        }
         val newExam = exam.copy(examId = examId)
         examRef.setValue(newExam)
             .addOnCompleteListener { task ->

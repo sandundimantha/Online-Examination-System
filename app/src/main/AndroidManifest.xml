@@ -25,6 +25,7 @@
         </activity>
 
         <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.WelcomeActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.RoleSelectionActivity" />
         <activity android:name=".activities.ExamListActivity" />

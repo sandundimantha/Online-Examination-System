@@ -46,11 +46,8 @@ class StudentHomeFragment : Fragment() {
         }
         binding.rvExams.adapter = adapter
 
-        // Auto-seed sample exams if none exist - calling static method if accessible or copying logic
-        // Assuming FirebaseService is accessible. If not, just fetch.
-        // com.example.smartexam.firebase.FirebaseService.seedExamsIfEmpty() 
-        // Commenting out seed call to avoid unresolved reference if not imported, 
-        // but the Activity had it. I'll just fetch.
+        // Auto-seed sample exams if none exist
+        com.example.smartexam.firebase.FirebaseService.seedExamsIfEmpty()
         
         fetchExams()
     }

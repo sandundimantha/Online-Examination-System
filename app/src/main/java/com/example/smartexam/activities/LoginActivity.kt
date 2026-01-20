@@ -41,12 +41,38 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
+        // Show Loading
+        binding.progressBar.visibility = android.view.View.VISIBLE
+        binding.btnLogin.isEnabled = false
+        
+        // Timeout Handler
+        val handler = android.os.Handler(android.os.Looper.getMainLooper())
+        val timeoutRunnable = Runnable {
+            binding.progressBar.visibility = android.view.View.GONE
+            binding.btnLogin.isEnabled = true
+            Toast.makeText(this, "Request timed out. Please check your internet connection.", Toast.LENGTH_LONG).show()
+        }
+        handler.postDelayed(timeoutRunnable, 15000) // 15 seconds
+
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Check role and redirect
-                    val uid = task.result?.user?.uid ?: return@addOnCompleteListener
+                    // Auth Success
+                    Toast.makeText(this, "Verified. Fetching Profile...", Toast.LENGTH_SHORT).show()
+                    
+                    val uid = task.result?.user?.uid 
+                    if (uid == null) {
+                         handler.removeCallbacks(timeoutRunnable)
+                         binding.progressBar.visibility = android.view.View.GONE
+                         binding.btnLogin.isEnabled = true
+                         return@addOnCompleteListener
+                    }
+
                     FirebaseService.getUserRole(uid) { role ->
+                        handler.removeCallbacks(timeoutRunnable) // Cancel timeout
+                        binding.progressBar.visibility = android.view.View.GONE
+                        binding.btnLogin.isEnabled = true
+                        
                         if (role == "admin") {
                             startActivity(Intent(this, AdminDashboardActivity::class.java))
                         } else {
@@ -55,7 +81,11 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     }
                 } else {
-                    Toast.makeText(this, "Login Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    handler.removeCallbacks(timeoutRunnable) // Cancel timeout
+                    binding.progressBar.visibility = android.view.View.GONE
+                    binding.btnLogin.isEnabled = true
+                    val errorMsg = task.exception?.message ?: "Unknown Error"
+                    Toast.makeText(this, "Login Failed: $errorMsg", Toast.LENGTH_LONG).show()
                 }
             }
     }
